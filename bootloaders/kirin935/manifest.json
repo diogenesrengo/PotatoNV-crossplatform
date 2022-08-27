@@ -1,5 +1,5 @@
 {
-    "name": "hisi960",
+    "name": "kirin935",
     "images": [
         {
             "filename": "xloader.img",
@@ -7,14 +7,9 @@
             "address": "0x00020000"
         },
         {
-            "filename": "uce.img",
-            "role": "uce",
-            "address": "0x6A908000"
-        },
-        {
             "filename": "fastboot.img",
             "role": "fastboot",
-            "address": "0x1AC00000"
+            "address": "0x10000000"
         }
     ],
     "props": {}

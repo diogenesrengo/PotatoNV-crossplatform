@@ -56,7 +56,7 @@ class ImageFlasher:
 
     def send_head_frame(self, length, address):
         self.serial.timeout = 0.09
-        ui.debug("Sending header frame")
+#        ui.debug("Sending header frame")
         data = self.headframe
         data += length.to_bytes(4, byteorder="big", signed=False)
         data += address.to_bytes(4, byteorder="big", signed=False)
@@ -64,7 +64,7 @@ class ImageFlasher:
 
     def send_data_frame(self, n, data):
         self.serial.timeout = 0.45
-        ui.debug("Sending data frame")
+#        ui.debug("Sending data frame")
         head = bytearray(self.dataframe)
         head.append(n & 0xFF)
         head.append((~ n) & 0xFF)
@@ -73,7 +73,7 @@ class ImageFlasher:
     def send_tail_frame(self, n):
         if self.serial:
             self.serial.timeout = 0.01
-        ui.debug("Sending tail frame")
+#        ui.debug("Sending tail frame")
         data = bytearray(self.tailframe)
         data.append(n & 0xFF)
         data.append((~ n) & 0xFF)

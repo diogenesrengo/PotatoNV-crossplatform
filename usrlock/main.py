@@ -3,6 +3,7 @@ import chalk
 import argparse
 import json
 import hashlib
+import time
 from os import path
 from glob import glob
 from PyInquirer import prompt
@@ -36,7 +37,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             'message': 'Select bootloader:',
             'choices': list(map(lambda x: path.split(x)[-1], glob('bootloaders/*')))
         })['bootloader']
-
+    
     if not args.key:
         args.key = prompt({
             'type': 'input',
@@ -44,11 +45,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             'message': 'What key should be set?',
             'validate': lambda val: len(val) == 16 or 'Excepted 16 symbols'
         })['key']
-    
-    args.manifest = "./bootloaders/%s/manifest.json".format(args.bootloader)
-
     if len(args.key) != 16:
         ui.error("Invalid key length!", critical=True)
+
+    args.manifest = "./bootloaders/" + args.bootloader + "/manifest.json"
 
     if not path.isfile(args.manifest):
         ui.error("Bootloader is invalid or not found!", critical=True)
@@ -75,6 +75,7 @@ def write_nvme(key: str):
     fb.connect()
     fb.write_nvme(b"USRKEY", m.digest())
     ui.success("Bootloader code updated")
+#    fb.unlock(key)
     ui.info("Rebooting device...")
     fb.reboot()
 

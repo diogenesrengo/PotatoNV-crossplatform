@@ -1,0 +1,16 @@
+{
+    "name": "kirin620",
+    "images": [
+        {
+            "filename": "xloader.img",
+            "role": "xloader",
+            "address": "0xF9800800"
+        },
+        {
+            "filename": "fastboot.img",
+            "role": "fastboot",
+            "address": "0x06800000"
+        }
+    ],
+    "props": {}
+}
